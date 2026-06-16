@@ -1,0 +1,21 @@
+{
+  "name": "artifact-evidence-skill",
+  "version": "0.1.0",
+  "description": "Collect local artifacts and command notes into reviewer-ready evidence packets.",
+  "type": "module",
+  "bin": {
+    "artifact-evidence": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/index.js && node --check bin/cli.js",
+    "build": "npm run check",
+    "smoke": "node bin/cli.js fixtures/manifest.json"
+  },
+  "keywords": [
+    "agent-skill",
+    "cli",
+    "dry-run"
+  ],
+  "license": "MIT"
+}

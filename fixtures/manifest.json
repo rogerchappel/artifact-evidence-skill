@@ -1,0 +1,19 @@
+{
+  "title": "PR Evidence",
+  "files": [
+    {
+      "label": "sample output",
+      "path": "sample-output.txt"
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "npm test",
+      "status": "pass",
+      "result": "3 tests"
+    }
+  ],
+  "notes": [
+    "Local-only packet; no uploads."
+  ]
+}

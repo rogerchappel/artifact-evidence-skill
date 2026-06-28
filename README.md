@@ -5,6 +5,7 @@ Collect local artifacts and command notes into reviewer-ready evidence packets.
 ## Quickstart
 
 ```bash
+npm install
 npm test
 npm run smoke
 ```
@@ -15,12 +16,34 @@ Run the full release-readiness gate before publishing or opening a release PR:
 npm run release:check
 ```
 
+The release gate runs the unit tests, syntax checks, CLI smoke test, and npm package allowlist check.
+
 ## CLI
 
 ```bash
 node bin/cli.js fixtures/manifest.json
 node bin/cli.js fixtures/manifest.json --json
 ```
+
+The command exits `0` when every referenced artifact exists and `1` when the packet has missing files.
+
+## Manifest Shape
+
+```json
+{
+  "title": "Release evidence",
+  "files": [
+    { "label": "README", "path": "README.md" },
+    { "label": "Smoke output", "path": "sample-output.txt" }
+  ],
+  "commands": [
+    { "cmd": "npm test", "status": "pass", "result": "node --test" }
+  ],
+  "notes": ["Keep generated packets local until reviewed."]
+}
+```
+
+Relative file paths are resolved from the manifest location, which keeps fixtures and reviewer packets portable.
 
 ## Library
 

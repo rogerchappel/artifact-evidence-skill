@@ -5,6 +5,8 @@ Collect local artifacts and command notes into reviewer-ready evidence packets.
 ## Quickstart
 
 ```bash
+npm install -g artifact-evidence-skill
+artifact-evidence fixtures/manifest.json
 npm install
 npm test
 npm run smoke
@@ -23,6 +25,12 @@ The release gate runs the unit tests, syntax checks, CLI smoke test, and npm pac
 ```bash
 node bin/cli.js fixtures/manifest.json
 node bin/cli.js fixtures/manifest.json --json
+```
+
+After global installation the same check is available as:
+
+```bash
+artifact-evidence fixtures/manifest.json
 ```
 
 The command exits `0` when every referenced artifact exists and `1` when the packet has missing files.

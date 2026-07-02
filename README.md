@@ -18,7 +18,7 @@ Run the full release-readiness gate before publishing or opening a release PR:
 npm run release:check
 ```
 
-The release gate runs the unit tests, syntax checks, CLI smoke test, and npm package allowlist check.
+The release gate runs the unit tests, syntax checks, CLI smoke test, and npm package allowlist check. The package smoke also confirms the changelog and contribution notes ship with the npm tarball.
 
 ## CLI
 

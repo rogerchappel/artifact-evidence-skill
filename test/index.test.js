@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { loadPacket } from '../src/index.js';
 
@@ -15,4 +16,11 @@ test('flags missing artifact references', () => {
   const packet = loadPacket({ files: ['missing.txt'] }, '/tmp/example/manifest.json');
   assert.equal(packet.ready, false);
   assert.equal(packet.missing.length, 1);
+});
+
+test('prints usage help', () => {
+  const output = execFileSync('node', ['bin/cli.js', '--help'], { encoding: 'utf8' });
+  assert.match(output, /Usage: artifact-evidence/);
+  assert.match(output, /<manifest\.json>/);
+  assert.match(output, /--json/);
 });

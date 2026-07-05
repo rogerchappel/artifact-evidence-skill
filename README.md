@@ -6,6 +6,7 @@ Collect local artifacts and command notes into reviewer-ready evidence packets.
 
 ```bash
 npm install -g artifact-evidence-skill
+artifact-evidence --help
 artifact-evidence fixtures/manifest.json
 npm install
 npm test

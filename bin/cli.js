@@ -2,6 +2,11 @@ import { readFileSync } from 'node:fs';
 import { loadPacket, renderMarkdown } from '../src/index.js';
 
 const args = process.argv.slice(2);
+if (args.includes('--help') || args.includes('-h')) {
+  console.log('Usage: artifact-evidence <manifest.json> [--json]');
+  process.exit(0);
+}
+
 const json = args.includes('--json');
 const file = args.find(arg => !arg.startsWith('--'));
 if (!file) {

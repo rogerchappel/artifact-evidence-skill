@@ -35,6 +35,14 @@ if (packageJson.bin?.["artifact-evidence"] !== "./bin/cli.js") {
   process.exit(1);
 }
 
+const helpOutput = execFileSync(process.execPath, [packageJson.bin["artifact-evidence"], "--help"], {
+  encoding: "utf8"
+});
+if (!helpOutput.includes("Usage: artifact-evidence")) {
+  console.error("Package smoke failed; artifact-evidence --help did not print usage text");
+  process.exit(1);
+}
+
 if (packageJson.repository?.url !== "git+https://github.com/rogerchappel/artifact-evidence-skill.git") {
   console.error("Package smoke failed; repository metadata does not point at the public GitHub repo");
   process.exit(1);

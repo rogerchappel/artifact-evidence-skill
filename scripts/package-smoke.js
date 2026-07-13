@@ -35,11 +35,28 @@ if (packageJson.bin?.["artifact-evidence"] !== "./bin/cli.js") {
   process.exit(1);
 }
 
+if (packageJson.exports?.["."] !== "./src/index.js") {
+  console.error("Package smoke failed; package export must expose ./src/index.js");
+  process.exit(1);
+}
+
 const helpOutput = execFileSync(process.execPath, [packageJson.bin["artifact-evidence"], "--help"], {
   encoding: "utf8"
 });
 if (!helpOutput.includes("Usage: artifact-evidence")) {
   console.error("Package smoke failed; artifact-evidence --help did not print usage text");
+  process.exit(1);
+}
+
+const importOutput = execFileSync(process.execPath, [
+  "--input-type=module",
+  "-e",
+  "import('./src/index.js').then((mod) => { if (typeof mod.loadPacket !== 'function' || typeof mod.renderMarkdown !== 'function') process.exit(1); })"
+], {
+  encoding: "utf8"
+});
+if (importOutput.trim()) {
+  console.error("Package smoke failed; package import smoke produced unexpected output");
   process.exit(1);
 }
 

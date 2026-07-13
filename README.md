@@ -56,7 +56,13 @@ Relative file paths are resolved from the manifest location, which keeps fixture
 
 ## Library
 
-Import from `src/index.js` for local automation and tests.
+Import the package API for local automation and tests:
+
+```js
+import { loadPacket, renderMarkdown } from "artifact-evidence-skill";
+```
+
+`npm run package:smoke` verifies this package export before release.
 
 ## Safety Notes
 

@@ -21,6 +21,19 @@ npm run release:check
 
 The release gate runs the unit tests, syntax checks, CLI smoke test, and npm package allowlist check. The package smoke also confirms the changelog and contribution notes ship with the npm tarball.
 
+## Verification
+
+Run the same checks used for release-readiness before publishing or opening a release PR:
+
+```bash
+npm run check
+npm test
+npm run build
+npm run smoke
+npm run release:check
+npm pack --dry-run
+```
+
 ## CLI
 
 ```bash

@@ -27,6 +27,11 @@ test('prints usage help', () => {
   assert.match(output, /--json/);
 });
 
+test('runs directly through the package bin entrypoint', () => {
+  const output = execFileSync('./bin/cli.js', ['--help'], { encoding: 'utf8' });
+  assert.match(output, /Usage: artifact-evidence/);
+});
+
 test('prints machine-readable JSON from the CLI', () => {
   const output = execFileSync('node', ['bin/cli.js', 'fixtures/manifest.json', '--json'], { encoding: 'utf8' });
   const packet = JSON.parse(output);

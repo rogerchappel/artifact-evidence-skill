@@ -27,6 +27,13 @@ test('prints usage help', () => {
   assert.match(output, /--json/);
 });
 
+test('rejects unknown CLI flags', () => {
+  const result = spawnSync('node', ['bin/cli.js', 'fixtures/manifest.json', '--format=json'], { encoding: 'utf8' });
+  assert.equal(result.status, 2);
+  assert.match(result.stderr, /Unknown option: --format=json/);
+  assert.match(result.stderr, /Usage: artifact-evidence/);
+});
+
 test('runs directly through the package bin entrypoint', () => {
   const output = execFileSync('./bin/cli.js', ['--help'], { encoding: 'utf8' });
   assert.match(output, /Usage: artifact-evidence/);

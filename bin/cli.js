@@ -9,6 +9,13 @@ if (args.includes('--help') || args.includes('-h')) {
 }
 
 const json = args.includes('--json');
+const unknownOption = args.find(arg => arg.startsWith('--') && arg !== '--json');
+if (unknownOption) {
+  console.error(`Unknown option: ${unknownOption}`);
+  console.error('Usage: artifact-evidence <manifest.json> [--json]');
+  process.exit(2);
+}
+
 const file = args.find(arg => !arg.startsWith('--'));
 if (!file) {
   console.error('Usage: artifact-evidence <manifest.json> [--json]');

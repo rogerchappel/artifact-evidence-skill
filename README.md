@@ -48,6 +48,8 @@ artifact-evidence fixtures/manifest.json
 ```
 
 The command exits `0` when every referenced artifact exists and `1` when the packet has missing files.
+Incomplete commands or unknown options exit `2`; see [CLI behavior](docs/CLI.md)
+for the full exit-code contract.
 
 ## Manifest Shape
 

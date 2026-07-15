@@ -14,6 +14,7 @@ const required = [
   "src/index.js",
   "fixtures/manifest.json",
   "fixtures/sample-output.txt",
+  "docs/CLI.md",
   "docs/LIMITATIONS.md",
   "docs/RELEASE_CANDIDATE.md",
   "SKILL.md",

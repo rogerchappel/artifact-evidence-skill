@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 
 const output = execFileSync("npm", ["pack", "--dry-run", "--json"], {
@@ -46,6 +47,18 @@ const helpOutput = execFileSync(process.execPath, [packageJson.bin["artifact-evi
 });
 if (!helpOutput.includes("Usage: artifact-evidence")) {
   console.error("Package smoke failed; artifact-evidence --help did not print usage text");
+  process.exit(1);
+}
+
+const unknownOption = spawnSync(process.execPath, [
+  packageJson.bin["artifact-evidence"],
+  "fixtures/manifest.json",
+  "--format=json"
+], {
+  encoding: "utf8"
+});
+if (unknownOption.status !== 2 || !unknownOption.stderr.includes("Unknown option: --format=json")) {
+  console.error("Package smoke failed; artifact-evidence must reject unknown options with exit code 2");
   process.exit(1);
 }
 

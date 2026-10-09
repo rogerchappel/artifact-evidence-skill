@@ -26,9 +26,17 @@ const required = [
   "CHANGELOG.md"
 ];
 
+const forbidden = ["package-lock.json"];
+
 const missing = required.filter((file) => !files.has(file));
 if (missing.length) {
   console.error(`Package smoke failed; missing files:\n${missing.join("\n")}`);
+  process.exit(1);
+}
+
+const unexpectedlyIncluded = forbidden.filter((file) => files.has(file));
+if (unexpectedlyIncluded.length) {
+  console.error(`Package smoke failed; private files must not be published:\n${unexpectedlyIncluded.join("\n")}`);
   process.exit(1);
 }
 
